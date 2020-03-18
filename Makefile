@@ -9,7 +9,9 @@ ENVIRONMENT?=integration
 DEPLOY?=./deploy.sh
 COMPONENTS ?= api:$(TAG)
 
-all:
+.PHONY : registry traefik build-docker push all
+
+all: traefik build-docker push
 	$(DEPLOY) $(ENVIRONMENT) $(NAMESPACE) $(DOCKER_REGISTRY) $(COMPONENTS)
 
 build-docker:
@@ -18,3 +20,8 @@ build-docker:
 push:
 	docker push $(IMAGE_TAG)
 
+traefik:
+	kubectl apply -f ./k8s/traefik/traefik.yaml
+
+registry:
+	docker run -d -p 5000:5000 --restart=always --name registry registry:2
