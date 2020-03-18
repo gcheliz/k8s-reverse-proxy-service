@@ -18,9 +18,76 @@ data:
     defaultEntryPoints = ["http","https"]
     [entryPoints]
       [entryPoints.http]
-      address = ":8080"
+      address = ":80"
       [entryPoints.https]
       address = ":443"
+        [entryPoints.https.tls]
+          [[entryPoints.https.tls.certificates]]
+          certFile = "/certs/demo.crt"
+          keyFile = "/certs/demo.key"
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: traefik-certs
+  namespace: traefik
+  labels:
+    app.kubernetes.io/name: ingress-traefik
+    app.kubernetes.io/part-of: ingress-traefik
+data:
+  demo.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIDrDCCApQCCQClFIqPJOY58jANBgkqhkiG9w0BAQsFADCBlzELMAkGA1UEBhMC
+    RVMxEjAQBgNVBAgMCUJhcmNlbG9uYTESMBAGA1UEBwwJQmFyY2Vsb25hMRcwFQYD
+    VQQKDA5Hb256YWxvIENoZWxpejELMAkGA1UECwwCSVQxEjAQBgNVBAMMCWxvY2Fs
+    aG9zdDEmMCQGCSqGSIb3DQEJARYXZ29uemFsb2NoZWxpekBnbWFpbC5jb20wHhcN
+    MjAwMzE4MTg0NTU4WhcNMjEwMzE4MTg0NTU4WjCBlzELMAkGA1UEBhMCRVMxEjAQ
+    BgNVBAgMCUJhcmNlbG9uYTESMBAGA1UEBwwJQmFyY2Vsb25hMRcwFQYDVQQKDA5H
+    b256YWxvIENoZWxpejELMAkGA1UECwwCSVQxEjAQBgNVBAMMCWxvY2FsaG9zdDEm
+    MCQGCSqGSIb3DQEJARYXZ29uemFsb2NoZWxpekBnbWFpbC5jb20wggEiMA0GCSqG
+    SIb3DQEBAQUAA4IBDwAwggEKAoIBAQDFUqd4pxDE39B+og/jJEUJjMmZpolTDs3W
+    7L5tYwUkPKOj69hDOsPjiHM6Tlil/FhEiP4Y8ea4RQkWejEtubYMG/MCdeiJMuw4
+    8cP0zF96juRen/CTmd/TymSucdBfgihqKoJj6IbtbmjshfYtkco6oqdBvaUWPbKs
+    UrK2esX9gKAWSWAUUj3g7z0OIoNwbZJXHJMs8j/+DUqtE7sqeW+J5jBCcTrg7Up8
+    ZdUkT+E5YqTmZg5+2r20ZKwrG4Ub8HKUCymYPyBC1vnGoVgpfmI9pt+iiAP+1ici
+    sfAgvq2U6Uln0DZN94jRk31Qn8ELBXC5L9qS0YLLXbRIj0qaM1kXAgMBAAEwDQYJ
+    KoZIhvcNAQELBQADggEBAFXDVcjWGyYhnmFOtpim8AeUqSO7SUQoHU9+O/HcYeEa
+    W0eWRQhXYZNJ12jfoWYGZmghxK7xc1bZ2ududkjJYqHLI8Xm4VoOBfewcvf0TC5K
+    MQ5cLQz/VbgRf8aiDJ0BbF7SN0Di3RejXnKP9reFSd3uIIlsh46KN2K12B3lmqI5
+    Kq55vkNqwvh2csIkZTe9LcTXi0MCV+Mgthn+NltvTufHWH7SXTjYGosEmEUqZZTS
+    t0nK49ZytNdnGMT4k8nnflZDLuPRgeteJZLyhWavUMRs7/CSAtG2k+PmtgTe1Pam
+    iYZ9nm4pYuXandTjQC163hYpW11TC0c57M9/kDFkUoM=
+    -----END CERTIFICATE-----
+    
+  demo.key: |
+    -----BEGIN PRIVATE KEY-----
+    MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDFUqd4pxDE39B+
+    og/jJEUJjMmZpolTDs3W7L5tYwUkPKOj69hDOsPjiHM6Tlil/FhEiP4Y8ea4RQkW
+    ejEtubYMG/MCdeiJMuw48cP0zF96juRen/CTmd/TymSucdBfgihqKoJj6Ibtbmjs
+    hfYtkco6oqdBvaUWPbKsUrK2esX9gKAWSWAUUj3g7z0OIoNwbZJXHJMs8j/+DUqt
+    E7sqeW+J5jBCcTrg7Up8ZdUkT+E5YqTmZg5+2r20ZKwrG4Ub8HKUCymYPyBC1vnG
+    oVgpfmI9pt+iiAP+1icisfAgvq2U6Uln0DZN94jRk31Qn8ELBXC5L9qS0YLLXbRI
+    j0qaM1kXAgMBAAECggEBAJLx85+JIpbKajTzsUshBnyPKM7Q03FUE/wbP9CsLfcH
+    ZYG8L8gZKin2woDIOYIawwz+y+N9uai+WH8xrg/0PdsUsUrCzdHmZz4c5SYXUH8v
+    jGffScRRkfrhvUqfnWKSxlARqhqG3nxQfbiuJl9XM7eoy0/Mz/UZK0bjKw1zrqAR
+    6vvLi3iM+6YjTrPGpKxU7CGGMZdJI9naZ96gd/fwb5V4JC0weXW4iLZjpN3op1kS
+    um895tk2jwojzcOurbUBsdrOF9IRh60hyVsgy9gd632NE7VXXYATzCD7PToK2ik9
+    yqu7gd3O/chdCkgGVLsBjULeIJNOmcJk7A+8ENGgRMECgYEA8fh0scd4yKmYVqJi
+    ip1uLbubh9u8ufnl8td3dRxtUhS//Gte3wvNXifVlXQzWaTtzeiVZpSRsTbg+jEh
+    HTYBA7DtTWl9A0wBdcWhd/N1/Cf1kKSENYbEqGLIFNk5+48ES7HVKdQ2NlaalXeD
+    V7GB90c8+FWFK39lSd6KvruOdqECgYEA0MN/YnT8DiTloJVsKMBQ1djmPLcuLI0j
+    6Kn7pEkjtLqq4BdFhMLViqgkJ/3huPS5Y4kxcAp8CEurJr8InmYwBSH848LoDzfG
+    Q8pk/FDxWPKn5aMMo/qv1KIXeBqSBdaU4QrNcUDNPz5mVhhFvwvxkrxuT2H5DgTg
+    WlFihk+tDLcCgYBl330B/EFV+lEw6F0kjvN8PahVoqXqhtPRUfXxUG6WSDYsR+hB
+    b+6e3ZaGvc2AyHd2YZ3E+nf8bGZ774NJkRsMOskt9mOzp6RVuUcqAU6DQy+YHiur
+    fXn+ithCLtLCnovoco6Udcv9RKkAlLiviwR034FD7H2Muq4iU5eGheCNAQKBgEHj
+    MbUVTuf35TFFd5l0+Q5FIoVPGxechBTOcUlsfARyVbPcJGi+RT85yg+FJVSGiGxN
+    xHikFnlXyHC2IjY78jPsgjAwN6V16PFEU5L+yO1VyH/Fchve5tepQNb7K9MD4oEU
+    M7rmxOCNBSdvCbQ+RMQXDImpVj2CdHyM6xeQ1gEJAoGBAK1By98nAITe779pxHA/
+    qz3VhHnxpmB0ZZNpMSiaQQw+LKcvthBrFedF7BjfTj3bkOIme1fHH9viq6FjuhPH
+    Kt/9pyxqP74vPh247ylgQaCM78QyGZTQPjhlQRZ57wJUNWkyW+SL1/s9X5qbpPSC
+    xsKhrQ2IgKLdtciCuHjDFzgq
+    -----END PRIVATE KEY-----
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -180,6 +247,9 @@ spec:
       - name: config
         configMap:
           name: traefik-conf
+      - name: certs
+        configMap:
+          name: traefik-certs
       containers:
       - image: traefik:1.7.18
         name: traefik-ingress-lb
@@ -189,10 +259,12 @@ spec:
           name: traefik-cache
         - mountPath: "/config"
           name: "config"
+        - mountPath: "/certs"
+          name: "certs"
         ports:
         - name: http
-          containerPort: 8080
-          hostPort: 8080
+          containerPort: 80
+          hostPort: 80
         - name: https
           containerPort: 443
           hostPort: 443
@@ -212,9 +284,9 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 8080
+  - port: 80
     name: http
-    targetPort: 8080
+    targetPort: 80
   - port: 443
     name: https
     targetPort: 443
