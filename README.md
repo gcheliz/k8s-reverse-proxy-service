@@ -70,3 +70,13 @@ And then you can make the challenge request to see the result:
 $ curl -L http://IP_ADDRESS/hello
 { "hello": "world" }
 ```
+Or:
+```
+$ curl -L https://IP_ADDRESS/hello
+curl: (60) SSL certificate problem: self signed certificate
+More details here: https://curl.haxx.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+```
