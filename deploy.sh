@@ -31,6 +31,7 @@ deploy_component() {
 export ENVIRONMENT=$1
 export NAMESPACE=$2
 export DOCKER_REGISTRY=$3
+export TAG=$4
 shift
 components_tags=$@
 

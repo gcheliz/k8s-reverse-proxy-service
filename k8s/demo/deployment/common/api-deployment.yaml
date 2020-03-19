@@ -21,7 +21,7 @@ spec:
         app: api
     spec:
       containers:
-      - image: localhost:5000/demo/api:latest
+      - image: ${DOCKER_REGISTRY}/demo/api:${TAG}
         name: api-node
         imagePullPolicy: Always
         ports:
