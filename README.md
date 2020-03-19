@@ -45,7 +45,6 @@ Requirements for the proxy:
 
 For the HTTPS redirection do you have the configuration commented in traefik.toml to be able to test both endpoints, but if you want, uncomment this code:
 
-Example:
 ```
 [entryPoints.http]
     ...
